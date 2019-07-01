@@ -1,0 +1,6 @@
+[
+  {"items": ["b01", "g01"], "expected_total": 3785},
+  {"items": ["r01", "r01"], "expected_total": 5437},
+  {"items": ["r01", "g01"], "expected_total": 6085},
+  {"items": ["b01", "b01", "r01", "r01", "r01"], "expected_total": 9827}
+]

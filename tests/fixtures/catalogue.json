@@ -1,0 +1,5 @@
+{
+  "r01": {"name":  "red widget", "sku":  "r01", "price": 3295},
+  "g01": {"name":  "green widget", "sku":  "g01", "price": 2495},
+  "b01": {"name":  "blue widget", "sku":  "b01", "price": 795}
+}
