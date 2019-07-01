@@ -1,0 +1,17 @@
+{
+    "name": "dblencowe/sales-checkout-calculator",
+    "description": "A simple Order total calculator for Acme Widget Co",
+    "type": "project",
+    "authors": [
+        {
+            "name": "Dave Blencowe",
+            "email": "dblencowe@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Dblencowe\\SalesCalc\\": "src/"
+        }
+    },
+    "require": {}
+}

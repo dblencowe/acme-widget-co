@@ -2,7 +2,7 @@
 
 
 ## Tasklist
-- [ ] Create git repository, initialize composer project and add initial ERD
+- [x] Create git repository, initialize composer project and add initial ERD
 - [ ] Write test harness
 - [ ] Implement initial interface for required basket methods
 - [ ] Implement Entity Models
