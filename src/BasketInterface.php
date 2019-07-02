@@ -4,7 +4,7 @@ namespace Dblencowe\SalesCalc;
 
 interface BasketInterface
 {
-    public function add(string $sku): bool;
+    public function add(string $sku): self;
 
     public function total(): int;
 }
