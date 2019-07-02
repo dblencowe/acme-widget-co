@@ -6,6 +6,5 @@
 - [x] Write test harness
 - [x] Implement initial interface for required basket methods
 - [x] Implement Entity Models
-- [ ] Implement config handler
 - [ ] Implement Basket
 - [ ] Finish off documentation
