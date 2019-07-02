@@ -19,6 +19,12 @@ class Basket implements BasketInterface
     private $offersApplied = [];
     private $discountAmount;
 
+    /**
+     * Basket constructor.
+     * @param stdClass $catalogue represents available inventory
+     * @param array $delivery represents available delivery bands
+     * @param array $offers represents available offers
+     */
     public function __construct(stdClass $catalogue, array $delivery, array $offers)
     {
         $this->catalogue = $catalogue;
@@ -29,6 +35,13 @@ class Basket implements BasketInterface
         $this->order = OrderFactory::makeOrder();
     }
 
+    /**
+     * Add an item to the basket via SKU
+     *
+     * @param string $sku The product SKU
+     * @return BasketInterface
+     * @throws CatalogueException SKU not found in loaded catalogue
+     */
     public function add(string $sku): BasketInterface
     {
         if (!isset($this->catalogue->$sku)) {
@@ -41,6 +54,12 @@ class Basket implements BasketInterface
         return $this;
     }
 
+    /**
+     * Get the current total of the basket in minimum base currency
+     *
+     * @return int
+     * @throws OrderException
+     */
     public function total(): int
     {
         $total = $this->getSubTotal();
