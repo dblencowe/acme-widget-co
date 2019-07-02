@@ -18,7 +18,9 @@
             "Dblencowe\\SalesCalcTests\\": "tests/"
         }
     },
-    "require": {},
+    "require": {
+        "tightenco/collect": "^5.8"
+    },
     "require-dev": {
         "phpunit/phpunit": "^8",
         "ext-json": "*"
