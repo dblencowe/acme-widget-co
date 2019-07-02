@@ -1,5 +1,5 @@
 [
-  {"lower_bound":  null, "upper_bound":  4999, "delivery_cost":  495},
+  {"lower_bound":  0, "upper_bound":  4999, "delivery_cost":  495},
   {"lower_bound":  5000, "upper_bound":  8999, "delivery_cost":  295},
-  {"lower_bound":  9000, "upper_bound":  null, "delivery_cost":  0}
+  {"lower_bound":  9000, "upper_bound":  999999999999, "delivery_cost":  0}
 ]

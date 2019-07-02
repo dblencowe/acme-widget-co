@@ -16,6 +16,8 @@ class Basket implements BasketInterface
 
     private $lineItemCost = 0;
     private $deliveryCost = 0;
+    private $offersApplied = [];
+    private $discountAmount;
 
     public function __construct(stdClass $catalogue, array $delivery, array $offers)
     {
@@ -42,6 +44,7 @@ class Basket implements BasketInterface
     public function total(): int
     {
         $total = $this->getSubTotal();
+        $total = $this->checkOffers($total);
         $total = $this->calculateDelivery($total);
 
         return $total;
@@ -83,6 +86,50 @@ class Basket implements BasketInterface
             }
         }
 
-        throw new OrderException('Unable to find correct shipping band');
+        throw new OrderException('Unable to find correct shipping band for total ' . $currentTotal);
+    }
+
+    private function checkOffers(int $currentTotal): int
+    {
+        $groupedItems = $this->order->getItems()->groupBy(function ($item, $key) {
+            return $item->getProductSku();
+        });
+        $skus = $groupedItems->keys()->toArray();
+
+        foreach($this->offers as $offer) {
+            if (empty(array_intersect($skus, $offer->affected_skus))) {
+                continue;
+            }
+
+            $applicableProducts = array_intersect($skus, $offer->affected_skus);
+            foreach($applicableProducts as $sku) {
+                if ($groupedItems->get($sku)->count() >= $offer->threshold) {
+                    $this->offersApplied[] = $offer;
+
+                    $discount = $this->calculateDiscount(
+                        $offer->discount_type,
+                        $offer->discount,
+                        $groupedItems->get($sku)->first()->getPrice()
+                    );
+                    $this->discountAmount += $discount;
+                    $currentTotal -= $discount;
+                }
+            }
+        }
+
+        return $currentTotal;
+    }
+
+    private function calculateDiscount(string $type, int $amount, int $subject): float
+    {
+        switch($type) {
+            case "percent":
+                return $subject * ((100 - $amount) / 100);
+            case "flat":
+
+                return $amount;
+            default:
+                throw new OrderException('Unable to apply discount with type ' . $type);
+        }
     }
 }
