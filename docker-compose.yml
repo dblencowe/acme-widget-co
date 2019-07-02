@@ -1,0 +1,7 @@
+version: '3'
+services:
+  test:
+    build: .
+    command: './vendor/bin/phpunit'
+    volumes:
+      - .:/srv
